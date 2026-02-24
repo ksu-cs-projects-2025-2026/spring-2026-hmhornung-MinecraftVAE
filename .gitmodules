@@ -1,0 +1,3 @@
+[submodule "text2mc-source-code"]
+	path = text2mc-source-code
+	url = https://github.com/hmhornung/text2mc-source-code.git
