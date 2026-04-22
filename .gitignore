@@ -1,3 +1,4 @@
 text2mc-dataprocessor/
 .venv/
-data/
+data/new_data/
+data/processed_builds/

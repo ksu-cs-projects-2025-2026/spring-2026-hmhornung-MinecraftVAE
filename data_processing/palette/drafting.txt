@@ -20,6 +20,8 @@ Palette:
 
         to_json
 
+        Combine palettes
+
 keep blockstates:
 Orientation ones:
 axis
