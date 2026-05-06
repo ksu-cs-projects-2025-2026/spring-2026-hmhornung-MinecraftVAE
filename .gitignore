@@ -2,3 +2,5 @@ text2mc-dataprocessor/
 .venv/
 data/new_data/
 data/processed_builds/
+data/MinecraftVAEDataset
+data/

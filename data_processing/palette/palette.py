@@ -14,12 +14,9 @@ from gdpc import Block
 from gdpc.block import transformedBlockOrPalette
 import itertools
 
-
-
-
 class Palette:
     
-    def __init__(self, src: str | dict | list):
+    def __init__(self, src: str | dict | list, add_transforms=True):
         # Get the block to token mapping
         if isinstance(src, str):
             with open(src, 'r') as file:
@@ -49,24 +46,29 @@ class Palette:
         self.gdpc_blocks = [self._blockstr_to_gdpc_block(blockstr) for blockstr in self.block_strings]
         self.length = len(self.block_strings)
         
-        self._add_missing_transformations()
+        if add_transforms:
+            self._add_missing_transformations()
+            
+            self.TransformLookup = namedtuple('TransformLookup', ['rot0', 'rot0flip', 'rot90', 'rot90flip', 'rot180', 'rot180flip', 'rot270', 'rot270flip'])
+            lookups = self._generate_transformation_lookups()
+            self.transform_lookup = self.TransformLookup(*lookups)
         
-        self.TransformLookup = namedtuple('TransformLookup', ['rot0', 'rot0flip', 'rot90', 'rot90flip', 'rot180', 'rot180flip', 'rot270', 'rot270flip'])
-        lookups = self._generate_transformation_lookups()
-        self.transform_lookup = self.TransformLookup(*lookups)
         
-        
-    def reduce_blockstates(self, keep_blockstates: list) -> tuple["Palette", np.ndarray, np.ndarray]:
+    def reduce_blockstates(self, keep_blockstates: list, block_ids=None) -> tuple["Palette", np.ndarray, np.ndarray]:
         reduced_block2tok = {}
         reduced_gdpc_blocks = []
         src2tgt_lookup = np.zeros(self.length, dtype=np.int16)
         
+        if block_ids is None: block_ids = []
+        
         for blockstr, token in self.block2token.items():
             block_id, states = self._blockstr_to_id_states(blockstr)
-            
-            # remove any blockstate info were not keeping
-            if states: states = {k:v for k,v in states.items() if k in keep_blockstates}
-            
+            # Case 1: no block ids specified, strip blockstates from any block
+            # Case 2, block ids specified, strip blockstates from only those specified
+            if not block_ids or block_id in block_ids:
+                # remove any blockstate info were not keeping
+                if states: states = {k:v for k,v in states.items() if k in keep_blockstates}
+
             # Using GDPC block objects since they can tell if two blocks with different state orders are equal
             reduced_block = Block(block_id, states)
             

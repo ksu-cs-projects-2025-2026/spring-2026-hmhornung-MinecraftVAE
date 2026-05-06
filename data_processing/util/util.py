@@ -27,4 +27,4 @@ def array_to_schematic(token_array, tok2block, save_path, filename="my_schematic
 
     # Save the schematic file
     schem.save(save_path, filename, mcschematic.Version.JE_1_21_5, True)
-    print(f"Successfully saved schematic to {filename}.schem")
+    print(f"Saved schematic to {filename}.schem")
