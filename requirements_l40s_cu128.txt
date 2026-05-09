@@ -21,8 +21,5 @@ h5py==3.10.0
 loguru
 pandas
 
-gdpc
-amulet-core
-amulet-nbt
+gdpc @ https://github.com/hmhornung/gdpc.git
 mcschematic
-nbtlib
