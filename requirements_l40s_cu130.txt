@@ -20,3 +20,9 @@ threadpoolctl==3.3.0
 h5py==3.10.0
 loguru
 pandas
+
+gdpc
+amulet-core
+amulet-nbt
+mcschematic
+nbtlib
