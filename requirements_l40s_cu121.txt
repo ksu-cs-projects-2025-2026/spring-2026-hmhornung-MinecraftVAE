@@ -23,3 +23,8 @@ threadpoolctl==3.3.0
 h5py==3.10.0
 loguru
 pandas
+
+matplotlib
+
+gdpc @ git+https://github.com/hmhornung/gdpc.git
+mcschematic

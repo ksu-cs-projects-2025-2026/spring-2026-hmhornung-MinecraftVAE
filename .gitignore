@@ -1,4 +1,6 @@
 text2mc-dataprocessor/
+.venv_local/
+.venv_cu121/
 .venv/
 data/new_data/
 data/processed_builds/
