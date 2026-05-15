@@ -1,0 +1,44 @@
+What the Palette module should do:
+ - Simplify the process of translating block palettes to others (blockstate reduction, rotation)
+
+Palette:
+
+    Constructors:
+        From File
+        From Dict
+        From List
+
+    Attributes:
+        block2token
+        token2block
+        TransformLookup = namedtuple('TransformLookup', ['rot0', 'rot0flip', 'rot90', 'rot90flip', 'rot180', 'rot180flip', 'rot270', 'rot270flip'])
+        transform_lookups[8] -> TransformLookup
+
+    Functions:
+
+        Reduce Blockstates -> Palette, original2reduced array, reduced2original array
+
+        to_json
+
+        Combine palettes
+
+keep blockstates:
+Orientation ones:
+axis
+facing
+shape
+
+
+Semantically relevant:
+east
+west
+north
+south
+face
+half
+
+maybes:
+layers (snow)
+level (water, lava)
+waterlogged
+falling (water, lava)
